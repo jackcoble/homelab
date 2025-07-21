@@ -20,3 +20,4 @@
   ansible.builtin.user:
     name: root
     password: "*"
+    password_lock: true

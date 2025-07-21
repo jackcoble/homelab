@@ -21,3 +21,26 @@
     name: root
     password: "*"
     password_lock: true
+
+- name: Add EPEL Testing repository
+  ansible.builtin.dnf:
+    name: epel-testing
+    state: present
+    update_cache: yes
+
+- name: Add ZFS repository
+  ansible.builtin.dnf:
+    name: http://download.zfsonlinux.org/epel-testing/10.0/zfs-release-2-8.el10.noarch.rpm
+    state: present
+    update_cache: yes
+    disable_gpg_check: yes
+
+- name: Install ZFS packages
+  ansible.builtin.dnf:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+    disable_gpg_check: yes
+  loop:
+    - zfs
+    - zfs-dkms

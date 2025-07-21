@@ -15,3 +15,8 @@
     groups: wheel
     shell: /bin/bash
     password: "ed7a0c58227520a690c5bc9bc17fa26bf86d135d6b9b5a4d6ecf88d9a9ab55f97fdaa0b0b580410c78053c0b757be5340d386729245da16d5b08024268e2b827"
+
+- name: Lock the root account
+  ansible.builtin.user:
+    name: root
+    password: "*"

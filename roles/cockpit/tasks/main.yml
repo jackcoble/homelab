@@ -1,9 +1,12 @@
 ---
-- name: Install Cockpit package
+- name: Install Cockpit packages
   ansible.builtin.dnf:
-    name: cockpit
+    name: "{{ item }}"
     state: present
     update_cache: yes
+  loop:
+    - cockpit
+    - cockpit-machines
 
 - name: Ensure cockpit.socket is enabled and running
   ansible.builtin.service:

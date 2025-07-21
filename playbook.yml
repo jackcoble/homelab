@@ -1,0 +1,6 @@
+---
+- name: Set up the Hypervisor
+  hosts: hypervisor
+  become: true
+  roles:
+    - bootstrap

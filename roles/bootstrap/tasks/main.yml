@@ -14,33 +14,9 @@
     state: present
     groups: wheel
     shell: /bin/bash
-    password: "ed7a0c58227520a690c5bc9bc17fa26bf86d135d6b9b5a4d6ecf88d9a9ab55f97fdaa0b0b580410c78053c0b757be5340d386729245da16d5b08024268e2b827"
+    password: "$y$j9T$hpC8/4.uMks.J0.w2OBAb/$rtJ1XKCpjPJvhLVTuDxeFwcllqtmjjR4yzMaZ0sqITD"
 
 - name: Lock the root account
   ansible.builtin.user:
     name: root
-    password: "*"
     password_lock: true
-
-- name: Add EPEL Testing repository
-  ansible.builtin.dnf:
-    name: epel-testing
-    state: present
-    update_cache: yes
-
-- name: Add ZFS repository
-  ansible.builtin.dnf:
-    name: http://download.zfsonlinux.org/epel-testing/10.0/zfs-release-2-8.el10.noarch.rpm
-    state: present
-    update_cache: yes
-    disable_gpg_check: yes
-
-- name: Install ZFS packages
-  ansible.builtin.dnf:
-    name: "{{ item }}"
-    state: present
-    update_cache: yes
-    disable_gpg_check: yes
-  loop:
-    - zfs
-    - zfs-dkms

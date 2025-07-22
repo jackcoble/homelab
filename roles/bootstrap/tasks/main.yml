@@ -20,3 +20,25 @@
   ansible.builtin.user:
     name: root
     password_lock: true
+
+- name: Disable SSH password authentication
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?\s*PasswordAuthentication'
+    line: 'PasswordAuthentication no'
+    backup: yes
+    validate: '/usr/sbin/sshd -T -f %s'
+
+- name: Disable empty-password logins
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?\s*PermitEmptyPasswords'
+    line: 'PermitEmptyPasswords no'
+    backup: yes
+    validate: '/usr/sbin/sshd -T -f %s'
+
+- name: Restart sshd to apply changes
+  ansible.builtin.systemd:
+    name: sshd
+    state: restarted
+    enabled: yes

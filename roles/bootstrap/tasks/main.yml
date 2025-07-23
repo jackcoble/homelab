@@ -8,19 +8,6 @@
     name: "*"
     state: latest
 
-- name: Create a local admin user
-  ansible.builtin.user:
-    name: admin
-    state: present
-    groups: wheel
-    shell: /bin/bash
-    password: "$y$j9T$hpC8/4.uMks.J0.w2OBAb/$rtJ1XKCpjPJvhLVTuDxeFwcllqtmjjR4yzMaZ0sqITD"
-
-- name: Lock the root account
-  ansible.builtin.user:
-    name: root
-    password_lock: true
-
 - name: Disable SSH password authentication
   ansible.builtin.lineinfile:
     path: /etc/ssh/sshd_config

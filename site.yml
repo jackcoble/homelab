@@ -4,5 +4,6 @@
   become: true
   roles:
     - bootstrap
+    - zfs
     - users
     - cockpit

@@ -8,6 +8,14 @@
     name: "*"
     state: latest
 
+- name: Install essential packages
+  ansible.builtin.dnf:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - nano
+    - git
+
 - name: Disable SSH password authentication
   ansible.builtin.lineinfile:
     path: /etc/ssh/sshd_config
